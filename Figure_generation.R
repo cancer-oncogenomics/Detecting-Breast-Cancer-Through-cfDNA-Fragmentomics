@@ -1,5 +1,4 @@
 rm(list = ls())
-setwd("D:/Dropbox (Geneseeq)/Geneseeq_work/tang/08.KB4Q(S94U)_breast_cancer/")
 
 library(extrafont)
 library(readxl)
@@ -150,7 +149,7 @@ p_base_model_train <- ggrocs(rocs = roc.plot.basemodel.train, breaks = seq(0,1,0
                              ci = FALSE,
                              legendTitle = "Training cohort (5 fold CV), Cancer vs Nodule\nAUC (95% CI)")
 
-# ggsave("Draft/GBP/Review_Figures/Figure SX basemodel_AUC.pdf",
+# ggsave("Figure SX basemodel_AUC.pdf",
 #        p_base_model_train,
 #        dpi = 300,width = 12,height = 12)
 
@@ -228,7 +227,7 @@ base_model_info <- inner_join(base_model_info,
 addWorksheet(wb, "basemodel_details")
 writeData(wb, sheet = "basemodel_details", base_model_info)
 
-# saveWorkbook(wb, file = "Draft/GBP/Review_Figures/Supplementary_tables_newly_added.xlsx", overwrite = TRUE)
+# saveWorkbook(wb, file = "Supplementary_tables_newly_added.xlsx", overwrite = TRUE)
 
 ##### base model AUC selection
 
@@ -306,13 +305,7 @@ p_box_plot_basemodel <- ggplot(all_base_model_simplified, aes(x=Feature, y=AUC, 
         panel.grid.minor = element_blank()) +
   xlab("Training cohort") 
 
-
-# ggsave("Draft/GBP/Review_Figures/Figure SX base_learner_selection.pdf",
-#        p_box_plot_basemodel,
-#        width = 6, height = 6,
-#        dpi = 600)
-
-ggsave("Draft/GBP/Review_Figures/Figure S9.pdf",
+ggsave("Figure S9.pdf",
        p_box_plot_basemodel,
        width = 6, height = 6,
        dpi = 600)
@@ -359,7 +352,7 @@ plot_top_feature <- ggplot(df_top_feature, aes(x = FeatureNumber, y = AUC, color
         panel.grid.minor = element_blank()) +
   xlab("Total Top Performing Feature Used") 
 
-# ggsave("Draft/GBP/Review_Figures/Figure SX top_feature_performance.pdf",
+# ggsave("Figure SX top_feature_performance.pdf",
 #        plot_top_feature,
 #        width = 12, height = 6,
 #        dpi = 600)
@@ -700,7 +693,7 @@ p_Merged_sens <- grid.arrange(
           panel.grid.minor = element_blank()),
   nrow = 2)
 
-ggsave(filename = "Draft/GBP/Review_Figures/Figure S14.pdf",
+ggsave(filename = "Figure S14.pdf",
        p_Merged_sens,
        dpi = 600,width = 12,height = 8)
 
@@ -723,7 +716,7 @@ p_Merged_specs <-  ggplot(Merged_specs_df,aes(x=Group, y=Value, fill = Group)) +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
-ggsave(filename = "Draft/GBP/Review_Figures/Figure S15.pdf",
+ggsave(filename = "Figure S15.pdf",
        p_Merged_specs,
        dpi = 600,width = 8,height = 4)
 
@@ -769,10 +762,6 @@ ggsave(filename = "Draft/GBP/Review_Figures/Figure S15.pdf",
 #   scale_y_continuous(breaks = c(0,0.25,tmp_value85, tmp_value90,0.5,0.75,1)) + 
 #   stat_compare_means(method = "wilcox.test") +
 #   geom_signif(comparisons = list(c("HR+","HR-")),map_signif_level=TRUE)
-# 
-# # ggsave(filename = "Draft/20220414/Figures&Tables/Figure_S5.pdf",
-# #        plot_grid(p_boxplot_HR, p_boxplot_HR_stage, nrow = 1, rel_widths = c(1,2), labels = c("A","B")),
-# #        dpi = 600,width = 12,height = 6)
 # 
 # ##### HER2 status
 # 
@@ -872,12 +861,8 @@ ggsave(filename = "Draft/GBP/Review_Figures/Figure S15.pdf",
 #   # annotate("text",label = c("85% sens", "90% sens"), x = 2.35, y = c(tmp_value85 + 0.015 ,tmp_value90 - 0.015) , color = "black", size = 4) +
 #   stat_compare_means(method = "wilcox.test") +
 #   geom_signif(comparisons = list(c("TNBC","Non-TNBC")),map_signif_level=TRUE)
-# 
-# # ggsave(filename = "Draft/20220414/Figures&Tables/Figure_S7.pdf",
-# #        plot_grid(p_boxplot_TNBC, p_boxplot_TNBC_stage, nrow = 1, rel_widths = c(1,2), labels = c("A","B")),
-# #        dpi = 600,width = 12,height = 6)
-# 
-# # ggsave(filename = "Draft/20220414/Figures&Tables/Figure_S5_new.pdf",
+#  
+# # ggsave(filename = "Figure_S5_new.pdf",
 # #        plot_grid(
 # #          plot_grid(p_boxplot_HR, p_boxplot_HR_stage, nrow = 1, rel_widths = c(1,2), labels = c("A","")),
 # #          plot_grid(p_boxplot_HER2, p_boxplot_HER2_stage, nrow = 1, rel_widths = c(1,2), labels = c("B","")),
@@ -933,6 +918,6 @@ roc.LOOCV[[paste0("cfFrag ", "(AUC=", t[2],")")]] <- ROC_LOOCV_Frag
 p_LOOCV <- ggrocs(rocs = roc.LOOCV, breaks = seq(0,1,0.2), fontsize = 12, 
                   legendTitle= "Validation subcohort", ci = FALSE)
 
-ggsave("Draft/GBP/Review_Figures/Figure 4 Panel F updated.pdf",
+ggsave("Figure 4 Panel F updated.pdf",
        p_LOOCV,
        dpi = 600,width = 6,height = 6)
